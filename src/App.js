@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Videos from './Videos';
 import './App.css';
 
 class App extends Component {
@@ -32,7 +33,7 @@ class App extends Component {
   render() {
     const { searchResponse, searchTerm } = this.state;
 
-    return (
+    return searchResponse.items ? (
       <div>
         <form
           id="youtube-video-search-form"
@@ -51,11 +52,9 @@ class App extends Component {
           <button type="submit">Search</button>
         </form>
 
-        <pre>
-          <code>{JSON.stringify(searchResponse, null, 4)}</code>
-        </pre>
+        <Videos searchResponse={searchResponse} />
       </div>
-    );
+    ) : null;
   }
 }
 
