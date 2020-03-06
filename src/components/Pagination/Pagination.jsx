@@ -6,24 +6,16 @@ export default class Pagination extends Component {
     super(props);
     this.state = {
       currentPage: 1,
-      totalPages: 1,
     };
   }
 
-  componentDidMount() {
-    const { searchResponse } = this.props;
-    this.setState({
-      totalPages: this.calculateTotalPages(searchResponse.pageInfo),
-    });
-  }
-
   calculateTotalPages = ({ totalResults, resultsPerPage }) =>
-    totalResults / resultsPerPage;
+    Math.ceil(totalResults / resultsPerPage);
 
   render() {
     const { searchResponse, searchVideos, searchTerm } = this.props;
     const { nextPageToken, prevPageToken } = searchResponse;
-    const { currentPage, totalPages } = this.state;
+    const { currentPage } = this.state;
 
     return (
       <div>
@@ -36,7 +28,7 @@ export default class Pagination extends Component {
         >
           left
         </button>
-        {currentPage} / {totalPages}
+        {currentPage} / {this.calculateTotalPages(searchResponse.pageInfo)}
         <button
           onClick={() => {
             this.setState({ currentPage: currentPage + 1 });
