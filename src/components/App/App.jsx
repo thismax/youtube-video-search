@@ -25,7 +25,7 @@ class App extends Component {
 
     xhr.open(
       'GET',
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
     );
 
     xhr.send();
