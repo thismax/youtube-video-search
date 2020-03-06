@@ -16,7 +16,14 @@ class App extends Component {
     this.searchVideos(searchTerm);
   }
 
-  searchVideos = query => {
+  concatPageToken = (url, pageToken) => {
+    if (pageToken) {
+      return `${url}&pageToken=${pageToken}`;
+    }
+    return url;
+  };
+
+  searchVideos = (query, pageToken) => {
     const xhr = new XMLHttpRequest(); // eslint-disable-line
 
     xhr.addEventListener('load', e => {
@@ -25,7 +32,10 @@ class App extends Component {
 
     xhr.open(
       'GET',
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
+      this.concatPageToken(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
+        pageToken,
+      ),
     );
 
     xhr.send();
@@ -53,7 +63,11 @@ class App extends Component {
           <button type="submit">Search</button>
         </form>
         {searchResponse.items ? (
-          <Videos searchResponse={searchResponse} />
+          <Videos
+            searchResponse={searchResponse}
+            searchTerm={searchTerm}
+            searchVideos={this.searchVideos}
+          />
         ) : (
           'Loading'
         )}

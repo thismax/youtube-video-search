@@ -1,15 +1,19 @@
 import React from 'react';
-import { shape } from 'prop-types';
+import { shape, string, func } from 'prop-types';
 import Pagination from '../Pagination/Pagination';
 import Video from '../Video/Video';
 
-const Videos = ({ searchResponse }) => (
+const Videos = ({ searchResponse, searchTerm, searchVideos }) => (
   <div>
     <div>
       Total Results:
       {searchResponse.pageInfo.totalResults}
     </div>
-    <Pagination searchResponse={searchResponse} />
+    <Pagination
+      searchResponse={searchResponse}
+      searchTerm={searchTerm}
+      searchVideos={searchVideos}
+    />
     <div>
       {searchResponse.items.map(video => (
         <Video key={video.etag} video={video} />
@@ -20,6 +24,8 @@ const Videos = ({ searchResponse }) => (
 
 Videos.propTypes = {
   searchResponse: shape({}).isRequired,
+  searchTerm: string.isRequired,
+  searchVideos: func.isRequired,
 };
 
 export default Videos;
