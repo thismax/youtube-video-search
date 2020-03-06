@@ -7,16 +7,17 @@ class App extends Component {
     super(props);
     this.state = {
       searchResponse: {},
-      searchTerm: 'react hooks'
+      searchTerm: 'react hooks',
     };
   }
 
   componentDidMount() {
-    this.searchVideos(this.state.searchTerm);
+    const { searchTerm } = this.state;
+    this.searchVideos(searchTerm);
   }
 
   searchVideos = query => {
-    const xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest(); // eslint-disable-line
 
     xhr.addEventListener('load', e => {
       this.setState({ searchResponse: JSON.parse(e.target.response) });
@@ -24,7 +25,7 @@ class App extends Component {
 
     xhr.open(
       'GET',
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
     );
 
     xhr.send();
