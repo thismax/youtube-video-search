@@ -34,7 +34,7 @@ class App extends Component {
   render() {
     const { searchResponse, searchTerm } = this.state;
 
-    return searchResponse.items ? (
+    return (
       <div>
         <form
           id="youtube-video-search-form"
@@ -52,10 +52,13 @@ class App extends Component {
           />
           <button type="submit">Search</button>
         </form>
-
-        <Videos searchResponse={searchResponse} />
+        {searchResponse.items ? (
+          <Videos searchResponse={searchResponse} />
+        ) : (
+          'Loading'
+        )}
       </div>
-    ) : null;
+    );
   }
 }
 
