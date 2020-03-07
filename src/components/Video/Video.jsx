@@ -16,17 +16,27 @@ const Video = ({ video }) => {
   return (
     <div className="card container">
       <div className="row">
-        <div className="col-sm-4">
-          <img src={thumbnails.high.url} alt="thumbnail" />
+        <div className="col-md-5 col-sm-12">
+          <img
+            src={thumbnails.high.url}
+            className="img-fluid"
+            alt="thumbnail"
+          />
         </div>
 
-        <div className="col-sm-8">
-          <div>{title}</div>
+        <div className="col-md-7 col-sm-12">
+          <h3 className="video-title pb-2">{title}</h3>
           <div>{description}</div>
-          <a href={`https://www.youtube.com/watch?v=${id}`}>View</a>
-          <div>
-            {moment(publishedAt).format('DD MMMM YYYY')} by
-            {channelTitle}
+          <div className="py-4">
+            <a
+              className="video-link"
+              href={`https://www.youtube.com/watch?v=${id}`}
+            >
+              View
+            </a>
+          </div>
+          <div className="video-date-channel">
+            {moment(publishedAt).format('DD MMMM YYYY')} by {channelTitle}
           </div>
         </div>
       </div>
