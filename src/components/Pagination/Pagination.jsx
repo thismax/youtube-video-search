@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { shape, func, string } from 'prop-types';
+import './Pagination.css';
 
 export default class Pagination extends Component {
   constructor(props) {
@@ -20,23 +21,25 @@ export default class Pagination extends Component {
     return (
       <div>
         <button
+          className="page-selector"
           onClick={() => {
             this.setState({ currentPage: currentPage - 1 });
             searchVideos(searchTerm, prevPageToken);
           }}
           type="button"
         >
-          left
+          <i className="fa fa-chevron-left mr-2" />
         </button>
         {currentPage} / {this.calculateTotalPages(searchResponse.pageInfo)}
         <button
+          className="page-selector"
           onClick={() => {
             this.setState({ currentPage: currentPage + 1 });
             searchVideos(searchTerm, nextPageToken);
           }}
           type="button"
         >
-          right
+          <i className="fa fa-chevron-right ml-2" />
         </button>
       </div>
     );
