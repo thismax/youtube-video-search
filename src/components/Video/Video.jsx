@@ -16,7 +16,7 @@ const Video = ({ video }) => {
   return (
     <div className="card container">
       <div className="row">
-        <div className="col-md-5 col-sm-12">
+        <div className="col-md-4 col-sm-12">
           <img
             src={thumbnails.high.url}
             className="img-fluid"
@@ -24,7 +24,7 @@ const Video = ({ video }) => {
           />
         </div>
 
-        <div className="col-md-7 col-sm-12">
+        <div className="col-md-8 col-sm-12">
           <h3 className="video-title pb-2">{title}</h3>
           <div>{description}</div>
           <div className="py-4">

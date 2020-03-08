@@ -18,8 +18,8 @@
 }
 
 .video-link:hover {
-  color: gainsboro;
-  background-color: darkgrey;
+  color: white;
+  background-color: #333333;
   text-decoration: none;
 }
 
