@@ -30,7 +30,7 @@ const Video = ({ video }) => {
           <div className="py-4">
             <a
               className="video-link"
-              href={`https://www.youtube.com/watch?v=${id}`}
+              href={`https://www.youtube.com/watch?v=${id.videoId}`}
             >
               View
             </a>
@@ -52,7 +52,9 @@ Video.propTypes = {
       publishedAt: string.isRequired,
       channelTitle: string.isRequired,
     }).isRequired,
-    id: shape({}).isRequired,
+    id: shape({
+      videoId: string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

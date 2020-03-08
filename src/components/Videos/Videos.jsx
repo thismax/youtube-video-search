@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, string, func } from 'prop-types';
+import { shape, string, func, arrayOf, number } from 'prop-types';
 import Pagination from '../Pagination/Pagination';
 import Video from '../Video/Video';
 
@@ -22,7 +22,16 @@ const Videos = ({ searchResponse, searchTerm, searchVideos }) => (
 );
 
 Videos.propTypes = {
-  searchResponse: shape({}).isRequired,
+  searchResponse: shape({
+    pageInfo: shape({
+      totalResults: number.isRequired,
+    }).isRequired,
+    items: arrayOf(
+      shape({
+        etag: string.isRequired,
+      }),
+    ).isRequired,
+  }).isRequired,
   searchTerm: string.isRequired,
   searchVideos: func.isRequired,
 };

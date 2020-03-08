@@ -46,8 +46,18 @@ export default class Pagination extends Component {
   }
 }
 
+Pagination.defaultProps = {
+  searchResponse: shape({
+    nextPageToken: null,
+    prevPageToken: null,
+  }),
+};
+
 Pagination.propTypes = {
-  searchResponse: shape({}).isRequired,
+  searchResponse: shape({
+    nextPageToken: string,
+    prevPageToken: string,
+  }),
   searchVideos: func.isRequired,
   searchTerm: string.isRequired,
 };
