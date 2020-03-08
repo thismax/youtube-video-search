@@ -1,7 +1,8 @@
 {
-  "name": "thinkhr-hw-max-jacobs",
+  "name": "youtube-video-search",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://thismax.github.io/youtube-video-search",
   "dependencies": {
     "@testing-library/jest-dom": "5.1.1",
     "@testing-library/react": "^9.3.2",
@@ -18,7 +19,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"./**/*.{js,jsx,json}\" ",
-    "lint": "eslint 'src/**/*.{js,jsx}'"
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +45,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-prettier": "^3.1.2",
+    "gh-pages": "^2.2.0",
     "prettier": "^1.19.1",
     "sass-loader": "8.0.2"
   },
