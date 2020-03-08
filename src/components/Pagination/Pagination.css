@@ -2,3 +2,8 @@
   background-color: transparent;
   border: transparent;
 }
+
+.disabled {
+  color: gainsboro;
+  cursor: not-allowed;
+}

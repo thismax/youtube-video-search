@@ -17,29 +17,42 @@ export default class Pagination extends Component {
     const { searchResponse, searchVideos, searchTerm } = this.props;
     const { nextPageToken, prevPageToken } = searchResponse;
     const { currentPage } = this.state;
+    const totalPages = this.calculateTotalPages(searchResponse.pageInfo);
+    const isFirstPage = currentPage === 1;
+    const isLastPage = currentPage === totalPages;
 
     return (
       <div>
         <button
           className="page-selector"
           onClick={() => {
-            this.setState({ currentPage: currentPage - 1 });
-            searchVideos(searchTerm, prevPageToken);
+            if (currentPage > 1) {
+              this.setState({ currentPage: currentPage - 1 });
+              searchVideos(searchTerm, prevPageToken);
+            }
           }}
           type="button"
         >
-          <i className="fa fa-chevron-left mr-2" />
+          <i
+            className={`fa fa-chevron-left ${isFirstPage ? 'disabled' : ''}`}
+          />
         </button>
-        {currentPage} / {this.calculateTotalPages(searchResponse.pageInfo)}
+        <span className="mx-2">
+          {currentPage} / {totalPages}
+        </span>
         <button
           className="page-selector"
           onClick={() => {
-            this.setState({ currentPage: currentPage + 1 });
-            searchVideos(searchTerm, nextPageToken);
+            if (currentPage < totalPages) {
+              this.setState({ currentPage: currentPage + 1 });
+              searchVideos(searchTerm, nextPageToken);
+            }
           }}
           type="button"
         >
-          <i className="fa fa-chevron-right ml-2" />
+          <i
+            className={`fa fa-chevron-right ${isLastPage ? 'disabled' : ''}`}
+          />
         </button>
       </div>
     );
