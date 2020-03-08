@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Videos from '../Videos/Videos';
-import searchResponse from '../../testData/searchResponse.json';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResponse,
+      searchResponse: {},
       searchTerm: '',
     };
   }
@@ -25,20 +24,17 @@ class App extends Component {
 
   searchVideos = (query, pageToken) => {
     const xhr = new XMLHttpRequest(); // eslint-disable-line
-
     xhr.addEventListener('load', e => {
       this.setState({ searchResponse: JSON.parse(e.target.response) });
     });
-
-    // xhr.open(
-    //   'GET',
-    //   this.concatPageToken(
-    //     `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
-    //     pageToken,
-    //   ),
-    // );
-
-    // xhr.send();
+    xhr.open(
+      'GET',
+      this.concatPageToken(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${query}&key=${process.env.REACT_APP_API_KEY}`,
+        pageToken,
+      ),
+    );
+    xhr.send();
   };
 
   render() {
@@ -56,13 +52,13 @@ class App extends Component {
         >
           <div className="row w-75 mx-auto py-2">
             <input
-              className="search-input col-10 py-2"
+              className="search-input col-11 py-2"
               type="text"
               placeholder="Search..."
               value={searchTerm}
               onChange={e => this.setState({ searchTerm: e.target.value })}
             />
-            <button type="submit" className="col-2 search-button">
+            <button type="submit" className="col-1 search-button">
               <i className="fa fa-search" />
             </button>
           </div>
@@ -75,7 +71,11 @@ class App extends Component {
             searchVideos={this.searchVideos}
           />
         ) : (
-          'Not Found, try another Search'
+          <div className="container">
+            <div className="text-center">
+              Nothing found, please try another Search.
+            </div>
+          </div>
         )}
       </div>
     );
